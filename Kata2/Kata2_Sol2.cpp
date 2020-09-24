@@ -1,0 +1,50 @@
+#include<iostream>
+#include<vector>
+#include<assert.h>
+using namespace std;
+
+//Tail recursive Binary Search
+int chop(int target, vector<int> data, int start, int end) {
+	if(end==0)
+		return -1;
+    int mid = start + (end-start)/2;
+    
+    if(data[mid] == target)
+        return mid;
+    
+    if(start >= end)
+        return -1;
+    
+    if(data[mid]<target)
+        return chop(target, data,  mid+1, end);
+    
+    else
+        return chop(target, data, start, mid);
+}
+
+
+
+
+int main()
+{
+	assert(0 == chop(1, {1, 3, 5}, 0, 3));
+	assert(-1 == chop(3, {}, 0, 0));
+	assert(-1 == chop(3, {1}, 0, 1));
+	assert(0 == chop(1, {1}, 0, 1));
+	assert(1 ==  chop(3, {1, 3, 5}, 0, 3));
+	assert(2 ==  chop(5, {1, 3, 5}, 0, 3));
+	assert(-1 == chop(0, {1, 3, 5}, 0, 3));
+	assert(-1 == chop(2, {1, 3, 5}, 0, 3));
+	assert(-1 == chop(4, {1, 3, 5}, 0, 3));
+	assert(-1 == chop(6, {1, 3, 5}, 0, 3));
+	assert(0 ==  chop(1, {1, 3, 5, 7}, 0, 4));
+	assert(1 ==  chop(3, {1, 3, 5, 7}, 0, 4));
+	assert(2 ==  chop(5, {1, 3, 5, 7}, 0, 4));
+	assert(3 ==  chop(7, {1, 3, 5, 7}, 0, 4));
+	assert(-1 == chop(0, {1, 3, 5, 7}, 0, 4));
+	assert(-1 == chop(2, {1, 3, 5, 7}, 0, 4));
+	assert(-1 == chop(4, {1, 3, 5, 7}, 0, 4));
+	assert(-1 == chop(6, {1, 3, 5, 7}, 0, 4));
+	assert(-1 == chop(8, {1, 3, 5, 7}, 0, 4));
+	return 0;
+}
